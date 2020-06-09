@@ -1,0 +1,25 @@
+<div>
+  <%= if @exercise.complete do %>
+    Complete!
+  <% end %>
+</div>
+<div>
+  <%= form_for :exercise, "#", [phx_change: "update", phx_hook: "repaint"], fn f -> %>
+  <ul>
+    <%= for property <- @exercise.properties do %>
+      <li style="<%= if !property["visible"], do: "display: none;" %>">
+        <%= "#{property["name"]}: #{property["value"]}" %>
+      <p>
+      <%= range_input f, property["name"], min: property["min"], max: property["max"], step: property["step"], phx_value: property["value"] , value: property["value"], id: "property_#{property["name"]}" %>
+      </p>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+</div>
+<svg id="samplediv" width="600px" height="300px">
+</svg>
+
+<button phx-click="validate">
+  Validate
+</button>

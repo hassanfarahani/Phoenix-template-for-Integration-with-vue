@@ -1,0 +1,16 @@
+<h1>Show Exercise</h1>
+<ul>
+  <li>
+    <strong>Name:</strong>
+    <%= @exercise.name %>
+  </li>
+  <li>
+    <strong>Description:</strong>
+    <%= @exercise.description %>
+  </li>
+</ul>
+
+<%= live_render @conn, WidgetsWeb.ExerciseLive, session: %{"exercise" => @exercise } %>
+
+<span><%= link "Edit", to: Routes.method_exercise_path(@conn, :edit, @exercise.method_id , @exercise) %></span>
+<span><%= link "Back", to: Routes.method_exercise_path(@conn, :index, @exercise.method_id) %></span>
